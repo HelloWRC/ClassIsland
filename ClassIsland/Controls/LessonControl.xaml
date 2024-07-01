@@ -12,8 +12,9 @@
              d:DesignHeight="450" d:DesignWidth="800"
              >
     <UserControl.Resources>
-        <converters1:SecondsLongToMinutesStringConverter x:Key="SecondsLongToMinutesStringConverter" />
-        <converters1:TimeLongToPercentMultiConverter x:Key="TimeLongToPercentMultiConverter" />
+        <converters1:SecondsLongToMinutesStringConverter x:Key="SecondsLongToMinutesStringConverter"/>
+        <converters1:SecondsLongToFormatStringConverter x:Key="SecondsLongToFormatStringConverter"/> 
+        <converters1:TimeLongToPercentMultiConverter x:Key="TimeLongToPercentMultiConverter"/>
     </UserControl.Resources>
     <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LessonControl}}}">
         <StackPanel Orientation="Horizontal">
@@ -65,6 +66,10 @@
                                             Value="{Binding SettingsSource.ExtraInfoType}" />
                                 </Style>
                             </TabControl.Style>
+                            
+                            <!-- // 布什戈门，为什么这里 Run 换个行，显示出来就会有个间隔啊？ -->
+                            <!-- // —— 干冰DryIce 在 24/6/30 22:00 因为这个 bug 改了一个小时。 -->
+                            
                             <TabItem>
                                 <TextBlock FontSize="13" VerticalAlignment="Bottom">
                                     <Run
@@ -115,6 +120,14 @@
                                     </Run><Run
                                               Text="{Binding LeftSeconds, Converter={StaticResource SecondsLongToMinutesStringConverter}}">
                                     </Run><Run Text="min" FontSize="13">
+                                    </Run>
+                                </TextBlock>
+                            </TabItem>
+                            <TabItem>
+                                <TextBlock FontSize="14" VerticalAlignment="Bottom">
+                                    <Run Text="-">
+                                    </Run><Run
+                                              Text="{Binding LeftSeconds, Converter={StaticResource SecondsLongToFormatStringConverter}}">
                                     </Run>
                                 </TextBlock>
                             </TabItem>
